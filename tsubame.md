@@ -16,12 +16,12 @@
 6. Click "add"
 7. Go back to terminal, and you can login like `ssh [account_name]@login.t4.gsic.titech.ac.jp -i [private_key-file]`
 8. Setup the ssh configure file `~/.ssh/config` to make login easier. An example of minimal configuration is,
-    ```bash
-    Host tsubame
-        HostName login.t4.gsic.titech.ac.jp
-        User your_name
-        IdentityFile /Users/your_name/.ssh/id_rsa_tsubame
-    ```
+  ```bash
+  Host tsubame
+     HostName login.t4.gsic.titech.ac.jp
+      User your_name
+      IdentityFile /Users/your_name/.ssh/id_rsa_tsubame
+  ```
 9. You can login TSUBAME by `ssh tsubame`
 
 # Getting computational resources
@@ -56,39 +56,39 @@
     + If you don't specify the group name, the job will be a trial-run so it stops in 1 hour.
 * The `script.sh` file contains the procedure of your calculation.
 * Eexamples of scripts are as follows:
-    + Gaussian: input file is `h2o.com`
-    ```bash
-    #!/bin/bash
-    #$ -cwd
-    #$ -l node_o=1
-    #$ -l h_rt=00:10:00
-    #$ -V
+  + Gaussian: input file is `h2o.com`
+  ```bash
+  #!/bin/bash
+  #$ -cwd
+  #$ -l node_o=1
+  #$ -l h_rt=00:10:00
+  #$ -V
 
-    source /etc/profile.d/modules.sh
-    module load gaussian16
+  source /etc/profile.d/modules.sh
+  module load gaussian16
 
-    INP="h2o.com"
-    PRG="g16"
+  INP="h2o.com"
+  PRG="g16"
 
-    ${PRG} ${INP}
-    ```
-    + VASP
-    ```bash
-    #!/bin/sh
-    #$ -cwd
-    #$ -l node_o=1
-    #$ -l h_rt=0:10:00
-    #$ -N flatmpi
+  ${PRG} ${INP}
+  ```
+  + VASP
+  ```bash
+  #!/bin/sh
+  #$ -cwd
+  #$ -l node_o=1
+  #$ -l h_rt=0:10:00
+  #$ -N flatmpi
 
-    source /etc/profile.d/modules.sh
+  source /etc/profile.d/modules.sh
 
-    module load intel
-    module load intel-mpi
+  module load intel
+  module load intel-mpi
 
-    PRG="/your_home_directory/vasp/vasp.6.4.3/bin/vasp_std"
+  PRG="/your_home_directory/vasp/vasp.6.4.3/bin/vasp_std"
 
-    mpiexec.hydra -ppn 1 -n 1 ${PRG} >& stdout
-    ```
+  mpiexec.hydra -ppn 1 -n 1 ${PRG} >& stdout
+  ```
 
 * You need to specify the **resource type** from the following table. The list can be found in https://www.t4.gsic.titech.ac.jp/docs/handbook.ja/jobs/
 
@@ -107,20 +107,13 @@
 |  cpu_8  | 8    | 0    | 18.6        | Only CPU        |
 |  cpu_4  | 4    | 0    | 9.2         | Only CPU        |
 
-* Write the "name" to the above jobscript of `#$ -l f_node=N`, where N is the number of the specified node type.
-
-<!--
-## Using booked node
-* You can book the nodes via TSUBAME portal.
-* With booked nodes (AR_ID should be given), you can submit jobs by
-`qsub -g [group_name] -ar [AR_ID] script.sh`.
--->
+* Write the "name" to the above jobscript of `#$ -l node_f=N`, where N is the number of the specified node type.
 
 # Confirming jobs
 * To confirm your job status, type: `qstat`.
 * Job states
-    * `qw`: waiting for run
-    * `r` : running
+  + `qw`: waiting for run
+  + `r` : running
     
 # Stopping jobs
 * To stop your jobs, type: `qdel [JOB_ID]`.
