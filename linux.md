@@ -9,14 +9,43 @@
 * No need to do, just open "terminal.app".
 
 ## Windows
-* Install WSL2 (Windows service for linux ver.2); following is an example in Windows 10
-    1. Open "Windows Power Shell" or "Terminal" as Administrator.
-    2. Type `wsl --set-default-version 2` (for safe)
-    3. Type `wsl --install -d Ubuntu`.
-    4. After installation is done, open `Ubuntu` in Application.
 
+### Windows 11
+1. Open "Windows Power Shell".
+2. Type `wsl --install`.
+
+### Windows 10
+#### Preparation Before Installing Linux
+1. Go to Windows "Start Button" → "Windows System Tools" → "Control Panel" → "Programs" → "Turn Windows features on or off (Windowsの機能の有効化または無効化)."
+2. The "Turn Windows features on or off" window will appear. Check "Windows Subsystem for Linux (WSL) (Linux用Windowsサブシステム(WSL))" and "Virtual Machine Platform (仮想マシンプラットフォーム)" then click "OK"
+3. Follow the on-screen instructions to restart your computer.
+
+#### Install the WSL2 Linux Kernel
+1. Access the browser and go to "https://aka.ms/wsl2kernel."
+2. Click on "WSL2 Linux kernel update package for x64 machines" to download the installer (If you are using ARM64 processor, install ARM64 version).
+3. Double-click the downloaded installer.
+4. Once the installer starts, click "Next" to proceed with the installation.
+
+#### Set WSL2 as the Default Version
+1. Press the "Windows" + "R" keys.
+2. When the "Run" menu appears, type "cmd" in the search box and click "OK."
+3. When the Command Prompt (black screen) appears, enter the following command and press "Enter."
+
+#### Access the "Microsoft Store" to install a Linux distribution
+1. Go to Windows "Start Button" then choose "Microsoft Store".
+2. Type "Ubuntu" in the search box and run the search.
+3. From the search results, select "Ubuntu" and click "Get" on the next screen.
+4. Click "Open" on the displayed screen.
+5. The initial setup screen for Ubuntu will appear.
+6. Enter the username and password.
+7. Installation done.
+8. Check version with "wsl --version". Confirm that "WSL Version" is 2.X.X, and "WSLg version" information is present (any version is OK). WSLg is needed to run the GUI applications on WSL.
+
+### Troubleshooting
 * When above doesn't work, check "Windows の機能の有効化、または無効化", then "Linux 用 Windows サブシステム", "仮想マシンプラットフォーム" is ON.
 * If you face "Error: 0x800701bc", visit https://aka.ms/wsl2kernel and download a file.
+
+### After installation
 * Note that WSL makes home directory (`/home/your_name`) which is different from the Windows user directory (`C:\Users\your_name`).
 * You can access Windows system from Ubuntu like: `cd` to Desktop by `cd /mnt/c/Users/your_name/Desktop/`.
 * It is useful to make symbolic link between Ubuntu and Windows like
